@@ -3,6 +3,9 @@ from django.shortcuts import render,redirect
 # Create your views here.
 import mysql.connector
 from django.contrib import messages
+from django.shortcuts import render
+import pandas as pd
+import os
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -55,11 +58,30 @@ def register(request):
         return redirect('main_menu')
     
     return render(request,'register.html')
-    
+
+
+
+def find_houses(request):
+    houses = None
+    if request.method == 'POST':
+        min_budget = int(request.POST.get('min_budget'))
+        max_budget = int(request.POST.get('max_budget'))
+
+        dataset_path = os.path.join('housefinder', 'Mumbai.csv') 
+        df = pd.read_csv(dataset_path)
+
+        filtered = df[(df['Price'] >= min_budget) & (df['Price'] <= max_budget)][['Location', 'Price']]
+        houses = filtered.to_dict(orient='records')  
+        print(houses)  
+    return render(request, 'find_houses.html', {'houses': houses})
+
+
 #Home page of our platform
 def main_menu(request):
     return render(request, 'main_menu.html')
-        
+
+
+
 
 
 

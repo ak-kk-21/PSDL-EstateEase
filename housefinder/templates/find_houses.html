@@ -1,0 +1,47 @@
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Houses</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 30px; }
+        table { width: 50%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Find Houses in Your Budget</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="min_budget">Minimum Budget (₹):</label>
+        <input type="number" name="min_budget" required><br><br>
+
+        <label for="max_budget">Maximum Budget (₹):</label>
+        <input type="number" name="max_budget" required><br><br>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if houses %}
+    <h2>Available Houses:</h2>
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Price (₹)</th>
+        </tr>
+        {% for house in houses %}
+        <tr>
+            <td>{{ house.Location }}</td> <!-- Access the 'Location' key -->
+            <td>{{ house.Price|intcomma }}</td> <!-- Access the 'Price' key and format it -->
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No houses found in this budget range.</p>
+    {% endif %}
+</body>
+</html>
