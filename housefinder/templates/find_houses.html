@@ -1,47 +1,169 @@
 {% load humanize %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+ 
     <title>Find Houses</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { margin-bottom: 30px; }
-        table { width: 50%; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ddd; }
+        /* Make the background image cover the full page */
+        body {
+            background-image: url('https://images.pexels.com/photos/3639540/pexels-photo-3639540.jpeg?auto=compress&cs=tinysrgb&w=6002');
+            background-size: cover; /* Ensure the image covers the whole page */
+            background-position: center center; /* Center the image */
+            background-attachment: fixed; /* Keep the background fixed during scrolling */
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            height: 100vh; /* Make sure the body takes up the full viewport height */
+            color: white; /* White text for better visibility on dark backgrounds */
+        }
+
+
+        /* Add a semi-transparent overlay to darken the background and improve text visibility */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+            z-index: -1; /* Ensure the overlay is behind the content */
+        }
+
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        form {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+
+        table {
+            width: 100%;
+            margin-top: 10px;
+            background-color: rgba(49, 183, 136, 0.3); /* Lighter background for the table */
+            border-radius: 8px;
+            border-collapse: collapse;
+        }
+
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            width: 200px;
+            margin-top: 10px;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            background-color: #238636;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+
+        button:hover {
+            background-color: #2ea043;
+        }
+
+
+        /* Container style for the available houses */
+        .houses-container {
+            width: 50%;  /* Reduced width for a more compact layout */
+            margin: 20px auto;
+            background-color: rgba(19, 103, 159, 0.7); /* Slight dark background for better visibility */
+            border-radius: 10px;
+            padding: 15px; /* Reduced padding to make it more compact */
+            text-align: center;
+        }
+
+
+        .houses-container h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;  /* Adjusted font size for a more compact look */
+        }
+
+
+        .houses-container table {
+            width: 100%;
+            margin-top: 10px;
+            background-color: rgba(49, 183, 136, 0.3); /* Lighter background for the table */
+        }
+
+
+        .houses-container th, .houses-container td {
+            padding: 8px;  /* Reduced padding */
+            border: 1px solid #ddd;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <!-- Overlay to darken the background -->
+    <div class="overlay"></div>
+
+
     <h1>Find Houses in Your Budget</h1>
+
 
     <form method="post">
         {% csrf_token %}
         <label for="min_budget">Minimum Budget (₹):</label>
         <input type="number" name="min_budget" required><br><br>
 
+
         <label for="max_budget">Maximum Budget (₹):</label>
         <input type="number" name="max_budget" required><br><br>
+
 
         <button type="submit">Search</button>
     </form>
 
+
+    {% if form_submitted %}
     {% if houses %}
-    <h2>Available Houses:</h2>
-    <table>
-        <tr>
-            <th>Location</th>
-            <th>Price (₹)</th>
-        </tr>
-        {% for house in houses %}
-        <tr>
-            <td>{{ house.Location }}</td> <!-- Access the 'Location' key -->
-            <td>{{ house.Price|intcomma }}</td> <!-- Access the 'Price' key and format it -->
-        </tr>
-        {% endfor %}
-    </table>
+        <div class="houses-container">
+            <h2>Available Houses:</h2>
+            <table>
+                <tr>
+                    <th>Location</th>
+                    <th>Price (₹)</th>
+                </tr>
+                {% for house in houses %}
+                <tr>
+                    <td>{{ house.Location }}</td>
+                    <td>{{ house.Price|intcomma }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
-        <p>No houses found in this budget range.</p>
+        <div class="no-houses-message">
+            <h2>No houses found in this price range.</h2>
+        </div>
     {% endif %}
+{% endif %}
 </body>
 </html>

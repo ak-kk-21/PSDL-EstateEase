@@ -63,7 +63,10 @@ def register(request):
 
 def find_houses(request):
     houses = None
+    form_submitted = False  # Track if user submitted the form
+
     if request.method == 'POST':
+        form_submitted = True  # User has submitted the form
         min_budget = int(request.POST.get('min_budget'))
         max_budget = int(request.POST.get('max_budget'))
 
@@ -71,9 +74,9 @@ def find_houses(request):
         df = pd.read_csv(dataset_path)
 
         filtered = df[(df['Price'] >= min_budget) & (df['Price'] <= max_budget)][['Location', 'Price']]
-        houses = filtered.to_dict(orient='records')  
-        print(houses)  
-    return render(request, 'find_houses.html', {'houses': houses})
+        houses = filtered.to_dict(orient='records')
+
+    return render(request, 'find_houses.html', {'houses': houses, 'form_submitted': form_submitted})
 
 
 #Home page of our platform

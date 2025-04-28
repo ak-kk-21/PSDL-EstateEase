@@ -1,42 +1,61 @@
-
 {% block content %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+   
 <style>
     body {
+        background-image: url('https://images.pexels.com/photos/3288103/pexels-photo-3288103.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         background-color: #0d1117;
-        color: #c9d1d9;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-size: cover; /* Ensures the background image covers the whole screen */
+        background-position: center center; /* Centers the image */
+        background-attachment: fixed; /* Keeps the image fixed during scroll */
+        background-color: #f7f7f7;
+        font-family: 'Playfair Display', serif;
+        height: 100vh; /* Ensure full viewport height */
+        margin: 0; /* Removes default margin */
         padding-top: 60px;
+        display: flex; /* Enables flexbox */
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
     }
 
+
     .form-container {
-        background-color: #161b22;
+        background-color: rgba(181, 207, 216, 0.7);
         border-radius: 12px;
-        padding: 40px;
-        max-width: 500px;
-        margin: auto;
+        padding: 30px; /* Reduced padding */
+        max-width: 400px; /* Reduced width */
+        width: 100%;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         animation: fadeIn 1s ease-in;
     }
 
+
     h2 {
         text-align: center;
-        margin-bottom: 30px;
-        color: #58a6ff;
+        margin-bottom: 20px; /* Reduced margin */
+        color:rgb(25, 117, 123);
+        font-size: 1.5rem; /* Adjusted font size */
     }
+
 
     label {
         font-weight: 600;
-        color: #c9d1d9;
+        color:rgb(25, 117, 123);
+        font-size: 1rem; /* Slightly smaller label text */
     }
+
 
     .form-control {
         background-color: #f0f0f0;
-        color: #333;
+        color:rgb(25, 117, 123);
         border: 1px solid #30363d;
         border-radius: 8px;
+        font-size: 0.95rem; /* Reduced font size */
     }
+
 
     .form-control:focus {
         border-color: #1f6feb;
@@ -45,24 +64,28 @@
         color: #333;
     }
 
+
     .form-control::placeholder {
         color: #b0b0b0;
     }
 
+
     .btn-primary {
-        background-color: #1f6feb;
+        background-color: rgb(25, 117, 123);
         border: none;
-        font-size: 1.1rem;
+        font-size: 1rem; /* Adjusted button font size */
         width: 100%;
-        padding: 12px;
+        padding: 10px; /* Reduced padding */
         border-radius: 8px;
         transition: background-color 0.3s ease;
     }
 
+
     .btn-primary:hover {
-        background-color: #388bfd;
+        background-color: rgb(92, 178, 184);
         transform: scale(1.02);
     }
+
 
     @keyframes fadeIn {
         from {
@@ -76,6 +99,7 @@
     }
 </style>
 
+
 <div class="form-container">
     {% if messages %}
     <div class="alert alert-danger" role="alert">
@@ -83,19 +107,22 @@
             {{ message }}
         {% endfor %}
     </div>
-{% endif %}
+    {% endif %}
 
-    <h2>Login to Your Fintastic Account</h2>
+
+    <h2>Login To your <strong> EstateEase </strong> Account</h2>
     <form method="post">{% csrf_token %}
         <div class="mb-3">
-            <label>Username</label>
+            <label><strong>Username</strong></label>
             <input type="text" name="user_name" class="form-control" placeholder="Enter your username" required>
         </div>
         <div class="mb-3">
-            <label>Password</label>
+            <label><strong>Password</strong></label>
             <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
+
+
 {% endblock %}

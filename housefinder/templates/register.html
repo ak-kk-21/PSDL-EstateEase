@@ -1,68 +1,94 @@
-
 {% block content %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
 
 <style>
     body {
+        background-image: url('https://images.pexels.com/photos/259593/pexels-photo-259593.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
         background-color: #0d1117;
         color: #c9d1d9;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Playfair Display', serif;
         padding-top: 60px;
+        height: 100vh;
+        margin: 0;
     }
 
+
+    .heading-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+
+    h2 {
+        color: rgb(13, 79, 85);
+        font-size: 2.5rem;
+        font-weight: 600;
+    }
+
+
     .form-container {
-        background-color: #161b22;
+        background-color: rgba(200, 213, 230, 0.49);
         border-radius: 12px;
-        padding: 40px;
-        max-width: 500px;
+        padding: 25px;
+        max-width: 400px; /* Reduced width */
+        width: 100%;
         margin: auto;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         animation: fadeIn 1s ease-in;
     }
 
-    h2 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #58a6ff;
-    }
 
     label {
         font-weight: 600;
-        color: #c9d1d9;
+        color: rgb(13, 79, 85);
     }
 
+
     .form-control {
-        background-color: #f0f0f0; /* Whitish background for input fields */
-        color: #333; /* Dark text for contrast */
+        background-color: #f0f0f0;
+        color: #333;
         border: 1px solid #30363d;
         border-radius: 8px;
+        height: 40px; /* Reduced height of input fields */
     }
+
 
     .form-control:focus {
         border-color: #1f6feb;
         box-shadow: 0 0 0 0.2rem rgba(31, 111, 235, 0.25);
-        background-color: #ffffff; /* Lighter white when focused */
+        background-color: #ffffff;
         color: #333;
     }
 
+
     .form-control::placeholder {
-        color: #b0b0b0;  /* Whitish placeholder text */
+        color: #b0b0b0;
     }
+
 
     .btn-success {
         background-color: #238636;
         border: none;
-        font-size: 1.1rem;
+        font-size: 1rem; /* Slightly smaller button font */
         width: 100%;
-        padding: 12px;
+        padding: 10px; /* Reduced padding */
         border-radius: 8px;
         transition: background-color 0.3s ease;
     }
+
 
     .btn-success:hover {
         background-color: #2ea043;
         transform: scale(1.02);
     }
+
 
     @keyframes fadeIn {
         from {
@@ -76,26 +102,30 @@
     }
 </style>
 
+
+<div class="heading-container">
+    <h2>Create Your <strong>EstateEase</strong> Account</h2>
+</div>
+
+
 <div class="form-container">
-    <h2>Create Your Fintastic Account</h2>
     <form method="post" autocomplete="off">{% csrf_token %}
         <div class="mb-3">
-            <label>User Name</label>
+            <label><strong>Username</strong></label>
             <input type="text" name="user_name" class="form-control" autocomplete="off" value="" placeholder="Enter your name" required>
         </div>
         <div class="mb-3">
-            <label>Email</label>
+            <label><strong>Email</strong></label>
             <input type="email" name="email" class="form-control" autocomplete="off" value="" placeholder="Enter your email" required>
         </div>
         <div class="mb-3">
-            <label>Phone</label>
+            <label><strong>Phone</strong></label>
             <input type="text" name="phoneno" class="form-control" autocomplete="off" value="" placeholder="Enter your phone number" required>
         </div>
         <div class="mb-3">
-            <label>Password</label>
+            <label><strong>Password</strong></label>
             <input type="password" name="password" class="form-control" autocomplete="off" value="" placeholder="Enter your password" required>
         </div>
-       
         <button type="submit" class="btn btn-success">Register</button>
     </form>
 </div>
