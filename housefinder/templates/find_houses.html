@@ -1,6 +1,5 @@
 {% load humanize %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
  
-    <title>Find Houses</title>
+    <title>EstateEase</title>
     <style>
         /* Make the background image cover the full page */
         body {
@@ -17,12 +16,11 @@
             background-size: cover; /* Ensure the image covers the whole page */
             background-position: center center; /* Center the image */
             background-attachment: fixed; /* Keep the background fixed during scrolling */
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', serif; 
             margin: 0;
             height: 100vh; /* Make sure the body takes up the full viewport height */
             color: white; /* White text for better visibility on dark backgrounds */
         }
-
 
         /* Add a semi-transparent overlay to darken the background and improve text visibility */
         .overlay {
@@ -35,18 +33,15 @@
             z-index: -1; /* Ensure the overlay is behind the content */
         }
 
-
         h1 {
             text-align: center;
             margin-top: 20px;
         }
 
-
         form {
             margin-bottom: 30px;
             text-align: center;
         }
-
 
         table {
             width: 100%;
@@ -56,13 +51,11 @@
             border-collapse: collapse;
         }
 
-
         th, td {
             padding: 8px;
             border: 1px solid #ddd;
             text-align: center;
         }
-
 
         input[type="number"] {
             padding: 10px;
@@ -71,11 +64,10 @@
             margin-top: 10px;
         }
 
-
         button {
             padding: 10px 20px;
             font-size: 1.1rem;
-            background-color: #238636;
+            background-color:rgb(51, 155, 171);
             color: white;
             border: none;
             border-radius: 5px;
@@ -83,11 +75,9 @@
             margin-top: 10px;
         }
 
-
         button:hover {
-            background-color: #2ea043;
+            background-color:rgb(14, 67, 75);
         }
-
 
         /* Container style for the available houses */
         .houses-container {
@@ -99,12 +89,10 @@
             text-align: center;
         }
 
-
         .houses-container h2 {
             margin-bottom: 15px;
             font-size: 1.5rem;  /* Adjusted font size for a more compact look */
         }
-
 
         .houses-container table {
             width: 100%;
@@ -112,58 +100,203 @@
             background-color: rgba(49, 183, 136, 0.3); /* Lighter background for the table */
         }
 
-
         .houses-container th, .houses-container td {
             padding: 8px;  /* Reduced padding */
             border: 1px solid #ddd;
             text-align: center;
+        }
+        select[name="location"] {
+            padding: 10px;
+            font-size: 1rem;
+            width: 220px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+            color: black;
+            appearance: none; /* For removing default arrow in some browsers */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        
+        /* Optional: styling for dropdown arrow (if you want it prettier) */
+        select[name="location"]:hover {
+            border-color: #2ea043; /* Green border on hover */
+        }
+        .no-houses-message {
+            width: 50%;
+            margin: 20px auto;
+            background-color: rgba(255, 0, 0, 0.5); /* Soft red background */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .no-houses-message h2 {
+            margin: 0;
+        }
+        .search-form-container {
+            width: fit-content;
+            margin: 20px auto;
+            background-color: rgba(19, 103, 159, 0.7);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .search-form select,
+        .search-form input[type="number"] {
+            padding: 8px;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+            color: black;
+            width: 120px;
+        }
+        
+        .search-form button {
+            padding: 8px 15px;
+            font-size: 1rem;
+            background-color: rgb(51, 155, 171);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .search-form button:hover {
+            background-color: rgb(14, 67, 75);
+        }
+        
+        .main-menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgb(51, 155, 171);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .main-menu-btn:hover {
+            background-color: rgb(14, 67, 75);
         }
     </style>
 </head>
 <body>
     <!-- Overlay to darken the background -->
     <div class="overlay"></div>
-
-
+    <a href="{% url 'main_menu' %}">
+        <button class="main-menu-btn">Main Menu</button>
+    </a>
+    <h1><strong>EstateEase</strong></h1>
     <h1>Find Houses in Your Budget</h1>
 
-
-    <form method="post">
-        {% csrf_token %}
-        <label for="min_budget">Minimum Budget (₹):</label>
-        <input type="number" name="min_budget" required><br><br>
-
-
-        <label for="max_budget">Maximum Budget (₹):</label>
-        <input type="number" name="max_budget" required><br><br>
-
-
-        <button type="submit">Search</button>
-    </form>
-
+    <div class="search-form-container">
+        <form method="post" class="search-form">
+            {% csrf_token %}
+            
+            <label for="location">Location</label>
+            <select name="location" id="location" required>
+                <option value="">Select Location</option>
+                {% for location in locations %}
+                    <option value="{{ location|slugify }}" {% if location == selected_location %}selected{% endif %}>{{ location }}</option>
+                {% endfor %}
+            </select>
+    
+            <label for="min_budget">Min Budget (₹)</label>
+            <input type="number" name="min_budget" id="min_budget" placeholder="Min ₹" required>
+    
+            <label for="max_budget">Max Budget (₹)</label>
+            <input type="number" name="max_budget" id="max_budget" placeholder="Max ₹" required>
+    
+            <label for="min_area">Min Area (sq. ft.)</label>
+            <input type="number" name="min_area" id="min_area" placeholder="Min Area" required>
+    
+            <label for="max_area">Max Area (sq. ft.)</label>
+            <input type="number" name="max_area" id="max_area" placeholder="Max Area" required>
+    
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
 
     {% if form_submitted %}
-    {% if houses %}
-        <div class="houses-container">
-            <h2>Available Houses:</h2>
-            <table>
-                <tr>
-                    <th>Location</th>
-                    <th>Price (₹)</th>
-                </tr>
-                {% for house in houses %}
-                <tr>
-                    <td>{{ house.Location }}</td>
-                    <td>{{ house.Price|intcomma }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    {% else %}
-        <div class="no-houses-message">
-            <h2>No houses found in this price range.</h2>
-        </div>
+        {% if houses %}
+            <div class="houses-container">
+                <h2>Available Houses in {{ selected_location|title }} :</h2>
+
+                <table>
+                    <tr>
+                        <th>Society</th>
+                        <th>Area (sq. ft.)</th>
+                        <th>Price (₹)</th>
+                    </tr>
+                    {% for house in houses %}
+                        <tr>
+                            <!-- Display Society, Area, and Price -->
+                            <td>{{ house.Society|default:"No Society Info Available" }}</td>
+                            <td>{{ house.Area }}</td>
+                            <td>{{ house.Price|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <div class="no-houses-message">
+                <h2>No houses found in this price range and area!!</h2>
+            </div>
+        {% endif %}
     {% endif %}
+    {% if houses %}
+    <div style="margin-top: 30px; text-align: center;">
+        <form method="post" style="display: inline-block; background-color: rgba(19, 103, 159, 0.7); padding: 20px; border-radius: 10px;">
+            {% csrf_token %}
+            
+            <!-- Keep earlier search values hidden -->
+            <input type="hidden" name="min_budget" value="{{ request.POST.min_budget }}">
+            <input type="hidden" name="max_budget" value="{{ request.POST.max_budget }}">
+            <input type="hidden" name="min_area" value="{{ request.POST.min_area }}">
+            <input type="hidden" name="max_area" value="{{ request.POST.max_area }}">
+            <input type="hidden" name="location" value="{{ request.POST.location }}">
+
+            <label for="sort_option" style="font-size: 1.2rem; font-family: 'Poppins', sans-serif; margin-right: 10px;">Sort By:</label>
+            
+            <select name="sort_option" required style="padding: 10px; font-size: 1rem; width: 220px; margin-right: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: white; color: black;">
+                <option value="">-- Select --</option>
+                <option value="price_low_high">Price: Low to High</option>
+                <option value="price_high_low">Price: High to Low</option>
+                <option value="area_low_high">Area: Low to High</option>
+                <option value="area_high_low">Area: High to Low</option>
+            </select>
+            
+            <button type="submit" style="padding: 10px 20px; font-size: 1.1rem; background-color: rgb(51, 155, 171); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Sort
+            </button>
+        </form>
+    </div>
 {% endif %}
+
+
 </body>
 </html>

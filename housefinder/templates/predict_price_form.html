@@ -1,0 +1,181 @@
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/3288103/pexels-photo-3288103.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-color: #f7f7f7;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        font-family: 'Playfair Display', serif;
+        height: 100vh;
+        margin: 0;
+        padding-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container {
+        background-color: rgba(181, 207, 216, 0.7);
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        animation: fadeIn 1s ease-in;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: rgb(25, 117, 123);
+        font-size: 2rem;
+    }
+
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: rgb(25, 117, 123);
+        font-size: 1.3rem;
+    }
+
+    label {
+        font-weight: 600;
+        color: rgb(25, 117, 123);
+        font-size: 1rem;
+    }
+
+    .form-control {
+        background-color: #f0f0f0;
+        color: rgb(25, 117, 123);
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .form-check-label {
+        color: rgb(25, 117, 123);
+        font-weight: 500;
+    }
+
+    .form-control:focus {
+        border-color: #1f6feb;
+        box-shadow: 0 0 0 0.2rem rgba(31, 111, 235, 0.25);
+        background-color: #ffffff;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: rgb(25, 117, 123);
+        border: none;
+        font-size: 1rem;
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(92, 178, 184);
+        transform: scale(1.02);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="form-container">
+    <h1>Predict Property Price</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="min_area">Minimum Area (sqft):</label>
+            <input type="number" id="min_area" name="min_area" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="max_area">Maximum Area (sqft):</label>
+            <input type="number" id="max_area" name="max_area" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <input type="number" id="bedrooms" name="bedrooms" class="form-control" required>
+        </div>
+
+        <h3>Amenities</h3>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="resale" name="resale" value="1">
+            <label class="form-check-label" for="resale">Resale</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gym" name="gym" value="1">
+            <label class="form-check-label" for="gym">Gym</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pool" name="pool" value="1">
+            <label class="form-check-label" for="pool">Swimming Pool</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="garden" name="garden" value="1">
+            <label class="form-check-label" for="garden">Landscaped Gardens</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="track" name="track" value="1">
+            <label class="form-check-label" for="track">Jogging Track</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="mall" name="mall" value="1">
+            <label class="form-check-label" for="mall">Shopping Mall</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="club" name="club" value="1">
+            <label class="form-check-label" for="club">Club House</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="school" name="school" value="1">
+            <label class="form-check-label" for="school">School</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="parking" name="parking" value="1">
+            <label class="form-check-label" for="parking">Car Parking</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hospital" name="hospital" value="1">
+            <label class="form-check-label" for="hospital">Hospital</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="lift" name="lift" value="1">
+            <label class="form-check-label" for="lift">Lift Available</label>
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary">Predict Price</button>
+    </form>
+</div>
+
+{% endblock %}

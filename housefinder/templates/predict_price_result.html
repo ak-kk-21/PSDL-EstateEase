@@ -1,0 +1,109 @@
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/3288103/pexels-photo-3288103.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-color: #0d1117;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        font-family: 'Playfair Display', serif;
+        height: 100vh;
+        margin: 0;
+        padding-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .result-container {
+        background-color: rgba(181, 207, 216, 0.7);
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        animation: fadeIn 1s ease-in;
+    }
+
+    h2, h4 {
+        text-align: center;
+        color: rgb(25, 117, 123);
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #333;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 48%;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: rgb(25, 117, 123);
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(92, 178, 184);
+        transform: scale(1.02);
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: scale(1.02);
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="result-container">
+    <h2>Predicted Price Range</h2>
+    <p><strong>Location:</strong> {{ request.POST.location }}</p>
+    <!-- <p><strong>Society:</strong> {{ request.POST.society }}</p> -->
+    <p><strong>Area Range:</strong> {{ request.POST.min_area }} sqft - {{ request.POST.max_area }} sqft</p>
+    <p><strong>No. of Bedrooms:</strong> {{ request.POST.bedrooms }}</p>
+
+    <h2>Price Prediction</h2>
+    <p><strong>Minimum Area ({{ request.POST.min_area }} sqft):</strong> ₹{{ predicted_price_min_area }}</p>
+    <p><strong>Maximum Area ({{ request.POST.max_area }} sqft):</strong> ₹{{ predicted_price_max_area }}</p>
+
+    <div class="button-group">
+        <a href="{% url 'predict_price' %}" class="btn btn-primary">Predict Again</a>
+        <a href="{% url 'main_menu' %}" class="btn btn-secondary">Main Menu</a>
+    </div>
+</div>
+
+{% endblock %}

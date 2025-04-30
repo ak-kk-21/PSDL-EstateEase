@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    
     <!-- Font links for Martel, Playfair Display, and Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martel:wght@200;300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-   
+    
     <style>
         body {
             font-family: 'Playfair Display', serif;  /* Default font for the body */
@@ -24,7 +24,7 @@
             align-items: center;
             text-align: center; /* Centers content horizontally */
         }
-       
+        
         .container {
             width: 100%;
             max-width: 400px; /* Reduced max-width to make the container smaller */
@@ -38,7 +38,7 @@
             justify-content: center;
             text-align: center; /* Ensure text inside the container is centered */
         }
-       
+        
         h1 {
             color: #333;
             font-size: 36px;
@@ -46,7 +46,7 @@
             font-weight: bold;
             font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
         }
-       
+        
         .button {
             padding: 10px 20px; /* Shortened padding for smaller button */
             font-size: 23px;
@@ -60,27 +60,27 @@
             transition: background-color 0.3s ease; /* Smooth transition for hover effect */
             display: inline-block; /* Ensure the button doesn’t stretch to full width */
         }
-       
+        
         .button:hover {
             background-color: hsl(120, 39.20%, 49.00%);
         }
-       
+        
         .button-secondary {
             background-color: rgb(120, 187, 140);
         }
-       
+        
         .button-secondary:hover {
             background-color: hsl(120, 39.20%, 49.00%);
         }
-       
+        
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to EstateEase</h1>
         <a href="{%url 'find_houses' %}" class="button button-secondary">Find Affordable Houses</a>
+        <a href="{% url 'predict_price' %}" class="button button-secondary">Predict Property Price</a>
         <a href="{% url 'home' %}" class="button ">Back To Home</a>
-
 
     </div>
 </body>
