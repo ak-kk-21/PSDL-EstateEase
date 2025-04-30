@@ -3,6 +3,10 @@
 EstateEase is a Django-based web application designed to help users quickly search for houses that match their budget, location, and bedroom requirements. Simple, clean, and effective — the way house hunting should be.
 
 ---
+## 📽️ Demo Video
+https://drive.google.com/file/d/1Mwoa_SId3ytabHBem8sC8eWGXz1OrzSH/view?usp=sharing
+
+---
 
 ## 📌 Project Overview
 
